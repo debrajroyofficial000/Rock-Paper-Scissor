@@ -8,39 +8,42 @@ function startGame() {
   let computerPoint = 0;
 
   for (let round = 0; round < 5; round++) {
-    const userSpell = Play();
+    const userSpell = prompt(
+      "Enter your choice \n 1. Rock \n 2. Paper \n 3. Scissor"
+    ).toLowerCase();
     const computerSpell = Play();
     if (userSpell === "rock" && computerSpell === "scissor") {
       userPoint++;
-      console.log("user won", userPoint);
+      alert("you won");
     }
     if (userSpell === "rock" && computerSpell === "paper") {
       computerPoint++;
-      console.log("computer won", computerPoint);
+      alert("computer won");
     }
     if (userSpell === "scissor" && computerSpell === "paper") {
       userPoint++;
-      console.log("user won", userPoint);
+      alert("you won");
     }
     if (userSpell === "scissor" && computerSpell === "rock") {
       computerPoint++;
-      console.log("computer won", computerPoint);
+      alert("computer won");
     }
     if (userSpell === "paper" && computerSpell === "rock") {
       userPoint++;
-      console.log("user won", userPoint);
+      alert("you won");
     }
     if (userSpell === "paper" && computerSpell === "scissor") {
       computerPoint++;
-      console.log("computer won", computerPoint);
+      alert("computer won");
     }
     if (userSpell === computerSpell) {
-      console.log("both of them draw");
+      alert("both of you draw");
     }
   }
 
-  if (userPoint > computerPoint) console.log("the final winner is user");
-  else console.log("the final winner is computer");
+  if (userPoint > computerPoint) alert("the user won the final battle");
+  else if (userPoint === computerPoint) alert("the batter is tie");
+  else alert("the computer won the final battle");
 }
 
 startGame();
