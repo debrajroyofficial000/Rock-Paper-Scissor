@@ -33,7 +33,6 @@ function play(player) {
     playerSpell.textContent = player;
     const computer = computerChoosingSpell();
     computerSpell.textContent = computer;
-    console.log(player);
 
     // * Comparison for player and computer spell
 
@@ -72,7 +71,6 @@ function play(player) {
 // * Reset the game
 
 function resetGame() {
-  console.log("reset button is clicked");
   gameScore.textContent = 0;
   playerScore.textContent = 0;
   computerScore.textContent = 0;
