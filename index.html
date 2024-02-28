@@ -4,9 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissor</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <!-- Main Container -->
+    <div class="container">
+      <!-- Game Counter -->
+      <h2>Game Counter : <span id="gameScore">0</span></h2>
+      <!-- Score Board -->
+      <div class="scoreBoard">
+        <div class="playerBoard">
+          <h2>You : <span id="playerScore">0</span></h2>
+          <h3 id="playerSpell"></h3>
+        </div>
+        <div class="computerBoard">
+          <h2>Computer : <span id="computerScore">0</span></h2>
+          <h3 id="computerSpell"></h3>
+        </div>
+      </div>
+      <!-- Result  -->
+      <h2 id="result">Players are you ready ?</h2>
+      <!-- Player Spells -->
+      <div class="playerSpells">
+        <button class="spells" id="rock">Rock</button>
+        <button class="spells" id="paper">Paper</button>
+        <button class="spells" id="scissor">Scissor</button>
+      </div>
+      <button id="reset">Reset</button>
+    </div>
     <script src="./main.js"></script>
   </body>
 </html>

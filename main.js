@@ -1,49 +1,98 @@
-const Play = () => {
+// ! VARIABLES
+const gameScore = document.querySelector("#gameScore");
+const playerScore = document.querySelector("#playerScore");
+const computerScore = document.querySelector("#computerScore");
+
+const playerSpell = document.querySelector("#playerSpell");
+const computerSpell = document.querySelector("#computerSpell");
+
+const result = document.querySelector("#result");
+
+const playerSpells = document.querySelectorAll(".spells");
+
+const resetBtn = document.querySelector("#reset");
+
+// ! HELPER FUNCTIONS
+
+// *  This functions return a random computer spell
+
+function computerChoosingSpell() {
   const spells = ["rock", "paper", "scissor"];
-  return spells[Math.floor(Math.random() * spells.length + 1)];
-};
+  return spells[Math.floor(Math.random() * spells.length)];
+}
 
-function startGame() {
-  let userPoint = 0;
-  let computerPoint = 0;
+// * This is the main game function where we are doing all the operations like comparing player's spell and computer's spell.
 
-  for (let round = 0; round < 5; round++) {
-    const userSpell = prompt(
-      "Enter your choice \n 1. Rock \n 2. Paper \n 3. Scissor"
-    ).toLowerCase();
-    const computerSpell = Play();
-    if (userSpell === "rock" && computerSpell === "scissor") {
-      userPoint++;
-      alert("you won");
-    }
-    if (userSpell === "rock" && computerSpell === "paper") {
-      computerPoint++;
-      alert("computer won");
-    }
-    if (userSpell === "scissor" && computerSpell === "paper") {
-      userPoint++;
-      alert("you won");
-    }
-    if (userSpell === "scissor" && computerSpell === "rock") {
-      computerPoint++;
-      alert("computer won");
-    }
-    if (userSpell === "paper" && computerSpell === "rock") {
-      userPoint++;
-      alert("you won");
-    }
-    if (userSpell === "paper" && computerSpell === "scissor") {
-      computerPoint++;
-      alert("computer won");
-    }
-    if (userSpell === computerSpell) {
-      alert("both of you draw");
+function play(player) {
+  // * Will start the game if the game counter is less than 5
+
+  if (Number(gameScore.textContent) < 5) {
+    // * Incrementing game counter
+
+    gameScore.textContent = Number(gameScore.textContent) + 1;
+    playerSpell.textContent = player;
+    const computer = computerChoosingSpell();
+    computerSpell.textContent = computer;
+    console.log(player);
+
+    // * Comparison for player and computer spell
+
+    if (player === computer) {
+      result.textContent = "Its a draw";
+    } else if (
+      (player === "rock" && computer === "scissor") ||
+      (player === "paper" && computer === "rock") ||
+      (player === "scissor" && computer === "paper")
+    ) {
+      result.textContent = "Yey ! You beat Computer !";
+      playerScore.textContent = Number(playerScore.textContent) + 1;
+    } else {
+      result.textContent = "Oh! Computer beats you !";
+      computerScore.textContent = Number(computerScore.textContent) + 1;
     }
   }
 
-  if (userPoint > computerPoint) alert("the user won the final battle");
-  else if (userPoint === computerPoint) alert("the batter is tie");
-  else alert("the computer won the final battle");
+  // * Else we advise to restart the game
+  else {
+    playerSpells.forEach((spell) => {
+      spell.disabled = true;
+    });
+    if (Number(playerScore.textContent) > Number(computerScore.textContent)) {
+      result.textContent = "You have won the game . Re start the Game";
+    } else if (
+      Number(playerScore.textContent) < Number(computerScore.textContent)
+    ) {
+      result.textContent = "Computer has won the game. Re play the Game";
+    } else {
+      result.textContent = "Game has drawn";
+    }
+  }
 }
 
-startGame();
+// * Reset the game
+
+function resetGame() {
+  console.log("reset button is clicked");
+  gameScore.textContent = 0;
+  playerScore.textContent = 0;
+  computerScore.textContent = 0;
+  playerSpell.textContent = "";
+  computerSpell.textContent = "";
+  result.textContent = "Players are you ready ?";
+
+  playerSpells.forEach((spell) => {
+    spell.disabled = false;
+  });
+}
+
+// ! EVENT LISTENERS
+
+playerSpells.forEach((spell) => {
+  spell.addEventListener("click", (id) => {
+    play(id.target.id);
+  });
+});
+
+// Button to reset the game
+
+resetBtn.addEventListener("click", resetGame);
